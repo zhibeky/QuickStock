@@ -15,4 +15,5 @@ export default [
   { languageOptions: { globals: globals.browser } },
   ...compat.extends('standard-with-typescript'),
   pluginReactConfig
+
 ]

@@ -7,10 +7,17 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended'
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'server.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
+
+  settings: {
+    react: {
+      version: 'detect' // Automatically detect the React version
+    }
+  },
   rules: {
+    '@typescript-eslint/no-var-requires': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true }
