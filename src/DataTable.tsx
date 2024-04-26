@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 // Optional: import styled-components or your preferred styling library
-interface Product {
+export interface IProduct {
   id: number;
   name: string;
-  "purchase price": number; // Handle potential spaces in property names
-  "selling price": number;
+  purchase_price: number; // Handle potential spaces in property names
+  selling_price: number;
   quantity: number;
-  "source of purchase": string;
-  "minimal amount": number;
+  source_of_purchase: string;
+  minimal_amount: number;
 }
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 const DataTable = () => {
-  const [data, setData] = useState<Product[]>([]); // Use useState for data management
+  const [data, setData] = useState<IProduct[]>([]); // Use useState for data management
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,7 +21,7 @@ const DataTable = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const fetchedData: Product[] = await response.json();
+        const fetchedData: IProduct[] = await response.json();
         setData(fetchedData);
       } catch (error) {
         console.error("Error fetching Excel data:", error);
@@ -50,12 +50,12 @@ const DataTable = () => {
             {/* Use a unique key for each row */}
             <td>{product.id}</td>
             <td>{product.name}</td>
-            <td>{product["purchase price"]}</td>{" "}
+            <td>{product["purchase_price"]}</td>{" "}
             {/* Access property with spaces */}
-            <td>{product["selling price"]}</td>
+            <td>{product["selling_price"]}</td>
             <td>{product.quantity}</td>
-            <td>{product["source of purchase"]}</td>
-            <td>{product["minimal amount"]}</td>
+            <td>{product["source_of_purchase"]}</td>
+            <td>{product["minimal_amount"]}</td>
           </tr>
         ))}
       </tbody>

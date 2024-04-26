@@ -34,6 +34,22 @@ app.get('/read-excel', (req, res) => {
     res.status(500).send({ error: 'Internal server error' })
   }
 })
+app.get('/get-low-stock-products', async (req, res) => {
+  try {
+    const workbook = xlsx.readFile('./db.xlsx'); // Assuming 'db.xlsx' is in the same directory
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    const data = xlsx.utils.sheet_to_json(sheet);
+
+    const lowStockProducts = data.filter(product => product.quantity < product.minimal_amount); // Adjust property names
+
+    res.json(lowStockProducts);
+  } catch (error) {
+    console.error('Error reading Excel file:', error);
+    res.status(500).send({ error: 'Internal server error' });
+  }
+});
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
