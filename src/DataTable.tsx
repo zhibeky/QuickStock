@@ -1,19 +1,57 @@
-import { useEffect, useState } from "react";
-// Optional: import styled-components or your preferred styling library
+import React, { useEffect, useState } from "react";
+import { Table, Button } from "antd";
+import type { TableProps } from "antd";
 export interface IProduct {
   id: number;
   name: string;
-  purchase_price: number; // Handle potential spaces in property names
+  purchase_price: number;
   selling_price: number;
   quantity: number;
   source_of_purchase: string;
   minimal_amount: number;
 }
+const columns: TableProps<IProduct>["columns"] = [
+  {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Purchase Price",
+    dataIndex: "purchase_price",
+    key: "purchase_price",
+  },
+  {
+    title: "Selling Price",
+    dataIndex: "selling_price",
+    key: "selling_price",
+  },
+  {
+    title: "Quantity",
+    dataIndex: "quantity",
+    key: "quantity",
+  },
+  {
+    title: "Source of Purchase",
+    dataIndex: "source_of_purchase",
+    key: "source_of_purchase",
+  },
+  {
+    title: "Minimal Amount",
+    dataIndex: "minimal_amount",
+    key: "minimal_amount",
+  },
+];
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
+const DataTable: React.FC = () => {
+  const [data, setData] = useState<IProduct[]>([]);
+  const [showLowQuantity, setShowLowQuantity] = useState(false);
 
-const DataTable = () => {
-  const [data, setData] = useState<IProduct[]>([]); // Use useState for data management
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,36 +68,21 @@ const DataTable = () => {
 
     fetchData();
   }, []);
+  const handleFilterButtonClick = () => {
+    setShowLowQuantity(!showLowQuantity);
+  };
+
+  const filteredData = showLowQuantity
+      ? data.filter((product) => product.quantity < product.minimal_amount)
+      : data;
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Purchase Price</th>
-          <th>Selling Price</th>
-          <th>Quantity</th>
-          <th>Source of Purchase</th>
-          <th>Minimal Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((product) => (
-          <tr key={product.id}>
-            {" "}
-            {/* Use a unique key for each row */}
-            <td>{product.id}</td>
-            <td>{product.name}</td>
-            <td>{product["purchase_price"]}</td>{" "}
-            {/* Access property with spaces */}
-            <td>{product["selling_price"]}</td>
-            <td>{product.quantity}</td>
-            <td>{product["source_of_purchase"]}</td>
-            <td>{product["minimal_amount"]}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <Button onClick={handleFilterButtonClick}>
+        {showLowQuantity ? "Show All Products" : "Show Low Quantity Products"}
+      </Button>
+      <Table columns={columns} dataSource={filteredData} />
+    </div>
   );
 };
 

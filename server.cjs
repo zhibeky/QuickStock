@@ -25,9 +25,7 @@ app.get('/read-excel', (req, res) => {
     const sheet = workbook.Sheets[sheetName]
     const data = xlsx.utils.sheet_to_json(sheet)
 
-    // console.log(data)
     res.json(data)
-    // res.send({ text: 'Zhibek' })
 
   } catch (error) {
     console.error('Error reading Excel file:', error)
