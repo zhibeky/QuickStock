@@ -1,11 +1,15 @@
-import DataTable from "./DataTable";
+// import DataTable from "./components/organisms/DataTable.tsx";
 import "./App.css";
+// import CartButton from "./components/atoms/CartButton.tsx";
+import Navbar from "./components/molecules/Navbar.tsx";
 
 function App() {
   return (
     <>
-      <h1>Excel Data</h1>
-      <DataTable />
+      <Navbar />
+      {/*/!*<h3>Data</h3>*!/*/}
+      {/*/!*<DataTable />*!/*/}
+      {/*<CartButton />*/}
     </>
   );
 }
