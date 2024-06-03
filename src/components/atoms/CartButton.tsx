@@ -1,7 +1,7 @@
-import React from "react";
+import { FC } from "react";
 import { FloatButton } from "antd";
 
-const CartButton: React.FC = () => (
+const CartButton: FC = () => (
   <>
     <FloatButton.Group shape="circle" style={{ right: 24 + 70 }}>
       <FloatButton

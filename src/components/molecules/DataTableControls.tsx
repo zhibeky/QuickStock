@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../atoms/Button.tsx";
+import { Button } from "../atoms/Button.tsx";
 
 interface DataTableControlsProps {
   showLowQuantity: boolean;

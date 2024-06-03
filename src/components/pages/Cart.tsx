@@ -2,7 +2,7 @@
 import React from "react";
 import AddToCartForm from "../molecules/AddToCartForm.tsx";
 import ProductTable from "../organisms/ProductTable.tsx";
-import Button from "../atoms/Button.tsx";
+import { Button } from "../atoms/Button.tsx";
 
 const Cart = () => {
   // State to store the list of product IDs added to the cart

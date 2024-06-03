@@ -4,6 +4,44 @@ import { Table } from "antd";
 import type { TableProps } from "antd";
 import type { IProduct } from "../../types/types.ts";
 
+const columns: TableProps<IProduct>["columns"] = [
+  {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Purchase Price",
+    dataIndex: "purchase_price",
+    key: "purchase_price",
+  },
+  {
+    title: "Selling Price",
+    dataIndex: "selling_price",
+    key: "selling_price",
+  },
+  {
+    title: "Quantity",
+    dataIndex: "quantity",
+    key: "quantity",
+  },
+  {
+    title: "Source of Purchase",
+    dataIndex: "source_of_purchase",
+    key: "source_of_purchase",
+  },
+  {
+    title: "Minimal Amount",
+    dataIndex: "minimal_amount",
+    key: "minimal_amount",
+  },
+];
+
 const DataTable: React.FC = () => {
   const [data, setData] = useState<IProduct[]>([]);
   const [showLowQuantity, setShowLowQuantity] = useState(false);
@@ -26,50 +64,12 @@ const DataTable: React.FC = () => {
   }, []);
 
   const handleFilterButtonClick = () => {
-    setShowLowQuantity(!showLowQuantity);
+    setShowLowQuantity((prev) => !prev);
   };
 
   const filteredData = showLowQuantity
     ? data.filter((product) => product.quantity < product.minimal_amount)
     : data;
-
-  const columns: TableProps<IProduct>["columns"] = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Purchase Price",
-      dataIndex: "purchase_price",
-      key: "purchase_price",
-    },
-    {
-      title: "Selling Price",
-      dataIndex: "selling_price",
-      key: "selling_price",
-    },
-    {
-      title: "Quantity",
-      dataIndex: "quantity",
-      key: "quantity",
-    },
-    {
-      title: "Source of Purchase",
-      dataIndex: "source_of_purchase",
-      key: "source_of_purchase",
-    },
-    {
-      title: "Minimal Amount",
-      dataIndex: "minimal_amount",
-      key: "minimal_amount",
-    },
-  ];
 
   return (
     <div>

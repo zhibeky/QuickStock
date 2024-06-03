@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     element: <DataTable />,
   },
   {
-    path: "/cart",
+    path: "/products",
     element: <Cart />,
   },
 ]);

@@ -5,26 +5,25 @@ import { IProduct } from "../../types/types";
 interface ProductTableProps {
   products: IProduct[];
 }
+const columns = [
+  {
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
+  },
+  {
+    title: "Name",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "Price",
+    dataIndex: "selling_price",
+    key: "selling_price",
+  },
+];
 
 const ProductTable: React.FC<ProductTableProps> = ({ products }) => {
-  const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Price",
-      dataIndex: "selling_price",
-      key: "selling_price",
-    },
-  ];
-
   return (
     <div>
       <h3>Purchased Products</h3>

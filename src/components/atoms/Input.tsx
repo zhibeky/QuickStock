@@ -5,8 +5,8 @@ interface Props extends InputProps {
   // You can add additional props specific to your application
 }
 
-const Input: React.FC<Props> = (props) => {
+export const Input: React.FC<Props> = (props) => {
   return <AntInput {...props} />;
 };
 
-export default Input;
+// export default Input;

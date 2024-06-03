@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Button from "../atoms/Button";
-import Input from "../atoms/Input";
+import { Button, Input } from "../atoms";
 
 interface AddToCartFormProps {
   onAddToCart: (productId: string) => void;
