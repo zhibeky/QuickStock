@@ -1,18 +1,40 @@
-// ParentComponent.tsx
-import React from "react";
-import AddToCartForm from "../molecules/AddToCartForm.tsx";
+// Cart.tsx
+import { useState } from "react";
+import { AddToCartForm } from "../molecules/AddToCartForm.tsx";
 import ProductTable from "../organisms/ProductTable.tsx";
 import { Button } from "../atoms/Button.tsx";
+import { IProduct } from "../../types/types";
 
-const Cart = () => {
+export const Cart = () => {
   // State to store the list of product IDs added to the cart
-  const [cartProducts, setCartProducts] = React.useState<string[]>([]);
-  const [purchasedProducts, setPurchasedProducts] = React.useState<any[]>([]);
+  const [cartProducts, setCartProducts] = useState<string[]>([]);
+  const [productDetails, setProductDetails] = useState<IProduct[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [purchasedProducts, setPurchasedProducts] = useState<IProduct[]>([]);
 
   // Function to add product ID to the cart
-  const addToCart = (productId: string) => {
+  const addToCart = async (productId: string) => {
     setCartProducts([...cartProducts, productId]);
+    try {
+      const response = await fetch("http://localhost:3000/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productIds: [productId] }),
+      });
+      if (response.ok) {
+        const result = await response.json();
+        setProductDetails([...productDetails, ...result.products]);
+      } else {
+        alert("Failed to fetch product details");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error fetching product details");
+    }
   };
+
   const makePurchase = async () => {
     if (cartProducts.length === 0) {
       alert("Cart is empty");
@@ -20,7 +42,7 @@ const Cart = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/cart", {
+      const response = await fetch("http://localhost:3000/purchase", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,6 +55,7 @@ const Cart = () => {
         alert(result.message);
         setPurchasedProducts(result.products);
         setCartProducts([]);
+        setProductDetails([]);
       } else {
         alert("Purchase failed");
       }
@@ -43,17 +66,12 @@ const Cart = () => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="add-to-cart">
       <AddToCartForm onAddToCart={addToCart} />
-      {/*<ProductTable*/}
-      {/*  productIds={purchasedProducts.map((product) => product.id)}*/}
-      {/*/>*/}
-      <ProductTable products={purchasedProducts} />
+      <ProductTable products={productDetails} />
       <Button type="primary" onClick={makePurchase}>
-        Make Purchase
+        Купить
       </Button>
     </div>
   );
 };
-
-export default Cart;

@@ -1,13 +1,39 @@
-import React, { useState } from "react";
-import { Button, Input } from "../atoms";
+import {
+  FC,
+  FormEvent,
+  KeyboardEvent,
+  useState,
+  useRef,
+  useEffect,
+} from "react";
+import { Button } from "../atoms";
+import { Input, InputRef } from "antd";
 
 interface AddToCartFormProps {
   onAddToCart: (productId: string) => void;
 }
-const AddToCartForm: React.FC<AddToCartFormProps> = ({ onAddToCart }) => {
+export const AddToCartForm: FC<AddToCartFormProps> = ({ onAddToCart }) => {
   const [productId, setProductId] = useState("");
+  const IdInput = useRef<InputRef | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Immediate focus on Input
+  useEffect(() => {
+    if (IdInput.current) {
+      // or, if Input component in your ref, then use input property like:
+      // IdInput.current.input.focus();
+      IdInput.current.focus();
+    }
+  }, []);
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      // onAddToCart(productId);
+      // setProductId("");
+      handleSubmit(event as unknown as FormEvent<HTMLFormElement>);
+    }
+  };
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (productId) {
       onAddToCart(productId);
@@ -17,32 +43,6 @@ const AddToCartForm: React.FC<AddToCartFormProps> = ({ onAddToCart }) => {
     }
   };
 
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setProductId(e.target.value);
-  // };
-
-  // const makePurchase = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:3000/cart/add", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ products }),
-  //     });
-  //     console.log("purchase made", await response.json());
-  //   } catch (error) {
-  //     console.error("Error adding product to cart:", error);
-  //   }
-  // };
-  // const addToCart = () => {
-  //   if (productId.trim() !== "") {
-  //     onAddToCart(productId);
-  //     setProductId("");
-  //   }
-  //   // console.log(products);
-  // };
-
   return (
     <form
       onSubmit={handleSubmit}
@@ -51,13 +51,13 @@ const AddToCartForm: React.FC<AddToCartFormProps> = ({ onAddToCart }) => {
       <Input
         value={productId}
         onChange={(e) => setProductId(e.target.value)}
-        placeholder="Enter product ID"
+        placeholder="Введите код продукта"
+        ref={IdInput}
+        onPressEnter={handleKeyPress}
       />
       <Button type="primary" htmlType="submit">
-        Add to Cart
+        Добавить в корзину
       </Button>
     </form>
   );
 };
-
-export default AddToCartForm;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../atoms/Button.tsx";
+import { Button } from "../atoms";
 
 interface DataTableControlsProps {
   showLowQuantity: boolean;
@@ -12,7 +12,9 @@ const DataTableControls: React.FC<DataTableControlsProps> = ({
 }) => {
   return (
     <Button onClick={onFilterButtonClick}>
-      {showLowQuantity ? "Show All Products" : "Show Low Quantity Products"}
+      {showLowQuantity
+        ? "Показать все продукты"
+        : "Показать продукты малого количества"}
     </Button>
   );
 };

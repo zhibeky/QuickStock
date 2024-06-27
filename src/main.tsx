@@ -1,38 +1,30 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import "./index.css";
-import DataTable from "./components/organisms/DataTable.tsx";
-import Cart from "./components/pages/Cart.tsx";
-// import AddToCartForm from "./components/molecules/AddToCartForm.tsx";
+// pages
+import { DataTable } from "./components/organisms/DataTable.tsx";
+import { Cart } from "./components/pages/Cart.tsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <div>Error: Not Found 404!</div>,
-  },
-  {
-    path: "/about",
-    element: <div>About us</div>,
-  },
-  {
-    path: "/read-excel",
-    element: <DataTable />,
-  },
-  {
-    path: "/get-low-stock-products",
-    element: <DataTable />,
-  },
-  {
-    path: "/products",
-    element: <Cart />,
-  },
-]);
+// layout
+import { RootLayout } from "./layout/layout.tsx";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Cart />} />
+      <Route path="read-excel" element={<DataTable />} />
+    </Route>,
+  ),
+);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
+  </StrictMode>,
 );

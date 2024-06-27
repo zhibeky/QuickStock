@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import DataTableControls from "../molecules/DataTableControls";
 import { Table } from "antd";
 import type { TableProps } from "antd";
@@ -11,38 +11,38 @@ const columns: TableProps<IProduct>["columns"] = [
     key: "id",
   },
   {
-    title: "Name",
+    title: "Наименование",
     dataIndex: "name",
     key: "name",
   },
   {
-    title: "Purchase Price",
+    title: "Цена покупки",
     dataIndex: "purchase_price",
     key: "purchase_price",
   },
   {
-    title: "Selling Price",
+    title: "Цена продажи",
     dataIndex: "selling_price",
     key: "selling_price",
   },
   {
-    title: "Quantity",
+    title: "Кол-во",
     dataIndex: "quantity",
     key: "quantity",
   },
   {
-    title: "Source of Purchase",
+    title: "Источник покупки",
     dataIndex: "source_of_purchase",
     key: "source_of_purchase",
   },
   {
-    title: "Minimal Amount",
+    title: "Мин. кол-во",
     dataIndex: "minimal_amount",
     key: "minimal_amount",
   },
 ];
 
-const DataTable: React.FC = () => {
+export const DataTable: FC = () => {
   const [data, setData] = useState<IProduct[]>([]);
   const [showLowQuantity, setShowLowQuantity] = useState(false);
 
@@ -87,5 +87,3 @@ const DataTable: React.FC = () => {
     </div>
   );
 };
-
-export default DataTable;

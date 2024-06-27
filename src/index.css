@@ -11,29 +11,45 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --primary: #0958d9;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+/*a {*/
+/*  font-weight: 500;*/
+/*  color: #646cff;*/
+/*  text-decoration: inherit;*/
+/*}*/
+/*a:hover {*/
+/*  color: #535bf2;*/
+/*}*/
 
 body {
   margin: 0;
+  padding: 20px;
   display: flex;
-  place-items: center;
+  /*place-items: center;*/
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+* {
+  margin: 0;
 }
+
+/*button {*/
+/*  border: 0;*/
+/*  padding: 8px;*/
+/*  border-radius: 4px;*/
+/*  color: white;*/
+/*  background: var(--primary);*/
+/*  cursor: pointer;*/
+/*}*/
+
+/*h1 {*/
+/*  font-size: 3.2em;*/
+/*  line-height: 1.1;*/
+/*}*/
 
 button {
   border-radius: 8px;
@@ -47,7 +63,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--primary);
 }
 button:focus,
 button:focus-visible {
@@ -66,25 +82,46 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
 /*nav {*/
-/*  padding: 0 1rem;*/
+/*  overflow: hidden;*/
+/*  position: fixed;*/
+/*  top: 0;*/
+/*  width: 100%;*/
 /*}*/
-nav {
-  overflow: hidden;
-  background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
+header nav {
+  display: flex;
+  gap: 16px;
+  justify-content: end;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+header nav h1 {
+  margin-right: auto;
+  border-bottom: 3px solid var(--primary);
+}
+header nav a {
   text-decoration: none;
+  padding: 6px;
+  border-radius: 4px;
 }
-.button {
-  /*padding: 1rem;*/
-  margin: 1rem;
+header nav a.active {
+  background: var(--primary);
+  color: white;
 }
+
+main {
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.add-to-cart {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  width: 100%;
+}
+.add-to-cart input, form label span, form textarea {
+  display: block;
+}
+

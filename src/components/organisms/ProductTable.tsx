@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { Table } from "antd";
 import { IProduct } from "../../types/types";
 
@@ -12,21 +12,21 @@ const columns = [
     key: "id",
   },
   {
-    title: "Name",
+    title: "Наименование",
     dataIndex: "name",
     key: "name",
   },
   {
-    title: "Price",
+    title: "Цена",
     dataIndex: "selling_price",
     key: "selling_price",
   },
 ];
 
-const ProductTable: React.FC<ProductTableProps> = ({ products }) => {
+const ProductTable: FC<ProductTableProps> = ({ products }) => {
   return (
     <div>
-      <h3>Purchased Products</h3>
+      <h3>Выбранные продукты</h3>
       <Table dataSource={products} columns={columns} rowKey="id" />
     </div>
   );

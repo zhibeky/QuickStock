@@ -1,12 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import { Input as AntInput, InputProps } from "antd";
 
-interface Props extends InputProps {
-  // You can add additional props specific to your application
-}
+interface Props extends InputProps {}
 
-export const Input: React.FC<Props> = (props) => {
+export const Input: FC<Props> = (props) => {
   return <AntInput {...props} />;
 };
-
-// export default Input;

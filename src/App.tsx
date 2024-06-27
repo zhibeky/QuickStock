@@ -7,9 +7,7 @@ function App() {
   return (
     <>
       <Navbar />
-      {/*/!*<h3>Data</h3>*!/*/}
-      {/*/!*<DataTable />*!/*/}
-      {/*<CartButton />*/}
+      {/*<Something />*/}
     </>
   );
 }

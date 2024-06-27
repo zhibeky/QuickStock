@@ -1,12 +1,12 @@
 import { Menu } from "antd";
-import { useState } from "react";
-import { HomeOutlined, UserOutlined, SettingOutlined } from "@ant-design/icons";
+import { useState, Key } from "react";
+import { HomeOutlined, UserOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+export const Navbar = () => {
   const [current, setCurrent] = useState("home");
 
-  const handleClick = (e: { key: React.Key }) => {
+  const handleClick = (e: { key: Key }) => {
     setCurrent(e.key.toString());
   };
 
@@ -16,26 +16,24 @@ const Navbar = () => {
         onClick={handleClick}
         selectedKeys={[current]}
         mode="horizontal"
-        style={{ position: "fixed", width: "100%", zIndex: 1000 }}
+        style={{ width: "100%", zIndex: 1000 }}
       >
         <Menu.Item key="home" icon={<HomeOutlined />}>
           <Link to="/" style={{ textDecoration: "none" }}>
-            Home
+            Главная
           </Link>
         </Menu.Item>
         <Menu.Item key="profile" icon={<UserOutlined />}>
           <Link to="/read-excel" style={{ textDecoration: "none" }}>
-            All Data
+            Все товары
           </Link>
         </Menu.Item>
-        <Menu.Item key="settings" icon={<SettingOutlined />}>
-          <Link to="/products" style={{ textDecoration: "none" }}>
-            Cart
-          </Link>
-        </Menu.Item>
+        {/*<Menu.Item key="settings" icon={<SettingOutlined />}>*/}
+        {/*  <Link to="/products" style={{ textDecoration: "none" }}>*/}
+        {/*    Корзина*/}
+        {/*  </Link>*/}
+        {/*</Menu.Item>*/}
       </Menu>
     </nav>
   );
 };
-
-export default Navbar;
